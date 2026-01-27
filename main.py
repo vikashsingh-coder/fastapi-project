@@ -32,7 +32,7 @@ async def read_items():
 def getRole(user_role: ModelRole):
     if user_role is ModelRole.admin:
         return {"access_role": user_role, "message": "have all access" }
-    elif user_role.value == "manager":
+    elif user_role.value == : ModelRole.manager.value
         return {"access_role": user_role, "message": "have partial access" }
     else:
         return {"access_role": user_role, "message": "Read only accesss" }
