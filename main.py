@@ -35,6 +35,6 @@ def getRole(user_role: ModelRole):
     elif user_role.value == "manager":
         return {"access_role": user_role, "message": "have partial access" }
     else:
-        return {"access_role": user_role, "message": "Read only access" }
+        return {"access_role": user_role, "message": "Read only accesss" }
 
 
