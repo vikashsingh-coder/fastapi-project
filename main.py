@@ -72,3 +72,24 @@ def read_items(q: Annotated[ list[str] | None, Query(min_length=1) ] = ["foo", "
     return query_items
 
 
+# example of query parameter with additional metadata
+# http://localhost:8000/additonal-metadata/?item-query=fixedquery
+@app.get("/additonal-metadata/")
+async def additonal_metadata(
+    q: Annotated[
+        str | None,
+        Query(
+            alias="item-query",
+            title="Query string title",
+            description="Query string for the items to search in the database that have a good match",
+            min_length=3,
+            max_length=50,
+            pattern="^fixedquery$",
+            deprecated=True,
+        ),
+    ] = None,
+):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
