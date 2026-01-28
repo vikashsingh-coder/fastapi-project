@@ -56,6 +56,7 @@ def createItem(items: Items):
         item_dict.update({"price_with_tax": price_with_tax})
     return item_dict
 
+# Update item details
 @app.put("/items/{itemId}", tags=["Items"])
 def updateItems(itemId, items: Items):
     return {
