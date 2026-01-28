@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from enum import Enum
 from pydantic import BaseModel
+from typing import Annotated
 
 class Items(BaseModel):
     name: str
@@ -63,4 +64,11 @@ def updateItems(itemId, items: Items):
         "itemId": itemId,
         "body": items 
     }
+
+# query parameter list with multiple values eg: http://localhost:8000/read-items/?q=blog&q=vikash
+@app.get("/read-items/")
+def read_items(q: Annotated[ list[str] | None, Query(min_length=1) ] = ["foo", "bar"] ):
+    query_items = {"q": q}
+    return query_items
+
 
