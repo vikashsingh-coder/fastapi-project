@@ -128,6 +128,9 @@ from fastapi import FastAPI, Cookie
 app = FastAPI()
 
 @app.get("/read-cookies/")
-async def read_cookies(ads_id: Annotated[str | None, Cookie()] = None):
-    return {"ads_id": ads_id}
+async def read_cookies( 
+    ads_id: Annotated[str | None, Cookie()] = None, 
+    auth_key: Annotated[str | None, Cookie()] = None
+    ):
+    return {"ads_id": ads_id, "auth_key": auth_key}
 
