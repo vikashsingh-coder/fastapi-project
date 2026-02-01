@@ -3,10 +3,12 @@
 Small FastAPI example project demonstrating request parameters, headers, and cookies.
 
 ## Prerequisites
+
 - Python 3.10+
 - A virtual environment is recommended
 
 ## Install
+
 Windows PowerShell:
 
 ```powershell
@@ -24,6 +26,7 @@ uvicorn main:app --reload --port 8000
 Open the interactive docs at http://127.0.0.1:8000/docs
 
 ## Notable endpoints
+
 - `GET /read-cookies/` — reads individual cookies (`ads_id`, `auth_key`)
 - `GET /read-multiple-cookies/` — reads multiple cookies via a Pydantic model
 - `GET /read-headers/` — example of reading a `User-Agent` header
@@ -32,10 +35,12 @@ Open the interactive docs at http://127.0.0.1:8000/docs
 - `GET /multiple-headers/` — reads multiple headers into a Pydantic model
 
 ## Notes
+
 - `main.py` contains many commented example routes illustrating FastAPI features.
 - The `POST /user` handler in `main.py` appears to be a placeholder and may need implementation or cleanup.
 
 ## Files
+
 - [main.py](main.py)
 - [requirements.txt](requirements.txt)
 - [Practice/cookies.py](Practice/cookies.py)
