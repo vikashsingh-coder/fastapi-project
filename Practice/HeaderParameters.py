@@ -1,3 +1,10 @@
+"""Header parameter examples for the FastAPI project.
+
+This module demonstrates reading individual headers, disabling
+underscore conversion, handling duplicate headers, and using a
+Pydantic model to parse multiple headers.
+"""
+
 from fastapi import FastAPI, Header
 from typing import Annotated
 from pydantic import BaseModel
@@ -6,7 +13,7 @@ app = FastAPI()
 
 class HeadersModel(BaseModel):
     user_agent: str | None = None
-    
+
 
 class MultiHeadersModel(BaseModel):
     # model_config = {"extra": "forbid"}  # to forbid extra headers
@@ -18,6 +25,7 @@ class MultiHeadersModel(BaseModel):
     traceparent: str | None = None
     x_tag: list[str] = []
     
+
 # read headers example
 @app.get("/read-headers/", tags=["Headers"])
 async def read_headers(user_agent: Annotated[str | None, Header(title="Pass Header", description="User are able to send header values")] = None):
