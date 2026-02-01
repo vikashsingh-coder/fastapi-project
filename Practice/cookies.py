@@ -1,3 +1,10 @@
+"""Cookie examples for the FastAPI project.
+
+This module shows how to read individual cookies and multiple cookies
+via a Pydantic model. The routes are examples and can be mounted
+into the main application for testing and learning.
+"""
+
 from typing import Annotated
 from fastapi import FastAPI, Cookie
 from pydantic import BaseModel
@@ -9,13 +16,15 @@ class CookiesModal(BaseModel):
     auth_key: str | None = None
     identifier: int | None = None
 
+
 # cookies parameter example
 @app.get("/read-cookies/")
-async def read_cookies( 
-    ads_id: Annotated[str | None, Cookie()] = None, 
-    auth_key: Annotated[str | None, Cookie()] = None
-    ):
+async def read_cookies(
+    ads_id: Annotated[str | None, Cookie()] = None,
+    auth_key: Annotated[str | None, Cookie()] = None,
+):
     return {"ads_id": ads_id, "auth_key": auth_key}
+
 
 # handle multiple cookies at once
 @app.get("/read-multiple-cookies/")
