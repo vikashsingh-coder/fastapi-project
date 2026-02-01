@@ -122,3 +122,14 @@
 # def read_cookies():
 #     return {"message": "Reading cookies"}
 
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+def fake_save_user(user_in: UserIn):
+    hashed_password = fake_passoword_hashed()
+
+@app.post("/user")
+async def create_user(user_in):
+    user_saved: fake_save_user(user_in)
