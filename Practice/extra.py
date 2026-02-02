@@ -93,3 +93,39 @@ class PlaneItem(ItemBase):
 @app.get("/items/{item_id}", response_model=Union[CarItem, PlaneItem])
 def read_item(item_id: str):
     return items[item_id]
+
+
+
+# return list of modle
+
+user_list = [
+    {"username": "user1", "email": "something1@gmail.com", "full_name": "User One"},
+    {"username": "user2", "email": "something2@gmail.com", "full_name": "User Two"},
+]
+
+class SingleUser(BaseModel):
+    username: str
+    email: str
+    full_name: Union[str, None] = None
+
+@app.get("/return_list_of_models/")
+def return_list_of_models():
+    return user_list
+
+
+# return dict of models
+
+user_list_dist = {
+    1: {"username": "user1", "email": "something1@gmail.com", "full_name": "User One"},
+    2: {"username": "user2", "email": "something2@gmail.com", "full_name": "User Two"},
+}
+
+
+class SingleUserModel(BaseModel):
+    username: str
+    email: str
+    full_name: Union[str, None] = None
+
+@app.get("/return_dist_of_models/", response_model=dict[int, SingleUserModel])
+def return_list_of_models():
+    return user_list_dist
