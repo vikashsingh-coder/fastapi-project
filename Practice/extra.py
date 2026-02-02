@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr
+from typing import Union
 
-# app = FastAPI()
+app = FastAPI()
 
 # class UserIn(BaseModel):
 #     username: str
@@ -65,3 +66,30 @@ def fake_save_user(user_in: UserIn):
 async def create_user(user_in: UserIn):
     user_saved = fake_save_user(user_in)
     return user_saved
+
+
+# Union of Example
+
+items = {
+    "item1": {"description": "All my friends drive a low rider", "type": "car"},
+    "item2": {
+        "description": "Music is my aeroplane, it's my aeroplane",
+        "type": "plane",
+        "size": 5,
+    },
+}
+
+class ItemBase(BaseModel):
+    description: str
+    type: str
+
+class CarItem(ItemBase):
+    type: str = "car"
+
+class PlaneItem(ItemBase):
+    type: str = "plane"
+    size: int
+
+@app.get("/items/{item_id}", response_model=Union[CarItem, PlaneItem])
+def read_item(item_id: str):
+    return items[item_id]
