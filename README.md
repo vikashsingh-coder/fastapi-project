@@ -19,11 +19,35 @@ pip install -r requirements.txt
 
 ## Run
 
-```powershell
-uvicorn main:app --reload --port 8000
+To run the application, use the following command:
+
+```bash
+uvicorn main:app --reload
 ```
 
 Open the interactive docs at http://127.0.0.1:8000/docs
+
+## Project Structure
+
+The project structure is as follows:
+
+```
+fastapi-project/
+├── data.json
+├── main.py
+├── README.md
+├── requirements.txt
+├── __pycache__/
+└── Practice/
+    ├── cookies.py
+    ├── extra.py
+    ├── HeaderParameters.py
+    └── StatusCode.py
+```
+
+## Usage
+
+You can test the API endpoints using tools like Postman or curl.
 
 ## Notable endpoints
 
