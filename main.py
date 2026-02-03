@@ -122,43 +122,44 @@
 # def read_cookies():
 #     return {"message": "Reading cookies"}
 
-from fastapi import FastAPI, status, HTTPException
+# How to handle form data in FastAPI
+
+from fastapi import FastAPI, Form
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
+from typing import Annotated
 
 app = FastAPI()
 
-# Crud operation with status code
+class FormData(BaseModel):
+    fname: str
+    lname: str
+    email: str
+    bio: str | None = None
 
-items_db = {
-    "item1": {"name": "Apple", "quantity": 10},
-    "item2": {"name": "Banana", "quantity": 20},
-    "item3": {"name": "Orange", "quantity": 15},
-}
+@app.post("/submit-form/", status_code=201)
+def submit_form( from_Data: Annotated[FormData, Form()]):
+    return {"form_data": from_Data}
 
-class Item(BaseModel):
-    name: str
-    quantity: int
-
-
-@app.get("/items", response_model=list[Item], status_code=200)
-def read_items():
-    return [ Item(**items) for items in items_db.values()]
-
-@app.post("/items/new", response_model=Item, status_code=status.HTTP_201_CREATED)
-def create_item(item: Item):
-    item_id = f"item{len(items_db) + 1}"
-    items_db[item_id] = item.model_dump() 
-    return item
-
-@app.put("/items/{item_id}", response_model=Item, responses={404: {"description": "Item not found"}}, status_code=status.HTTP_200_OK)
-def update_item(item_id: str, item: Item):
-    if item_id not in items_db:
-        raise HTTPException(status_code=404, detail="Item not found")
-    items_db[item_id] = item.model_dump()
-    return item
-
-@app.delete("/items/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_item(item_id: str):
-    if item_id in items_db:
-        del items_db[item_id]
-        return 
+# here I need to return an html form for login
+@app.get("/login/", response_class=HTMLResponse)
+def Login():
+    html_content = """
+    <html>
+        <head>
+            <title>Login Form</title>
+        </head>
+        <body>
+            <h2>Login</h2>
+            <form action="/submit-form" method="post">
+                <label for="fname">fname:</label><br>
+                <input type="text" id="fname" name="fname"><br><br>
+                <label for="lname">lname:</label><br>
+                <input type="pasword" id="lname" name="lname"><br><br>
+                 <label for="email">email:</label><br>
+                <input type="text" id="email" name="email"><br><br>
+                <button type="submit" >Submit</button>
+            </form>
+        </body>
+    </html>"""
+    return HTMLResponse(content=html_content)
