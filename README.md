@@ -47,7 +47,20 @@ fastapi-project/
 
 ## Usage
 
-You can test the API endpoints using tools like Postman or curl.
+To start the application, run the following command:
+
+```bash
+uvicorn main:app --reload
+```
+
+## Endpoints
+
+- **GET /**: Returns a welcome message.
+- **POST /items/**: Create an item with parameters.
+
+## License
+
+This project is licensed under the MIT License.
 
 ## Notable endpoints
 
