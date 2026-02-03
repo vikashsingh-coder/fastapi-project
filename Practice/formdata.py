@@ -38,3 +38,15 @@ def Login():
         </body>
     </html>"""
     return HTMLResponse(content=html_content)
+
+
+class FormData1(BaseModel):
+    username: str
+    password: str
+    model_config = {"extra": "forbid"}
+
+
+@app.post("/login/")
+async def login(data: Annotated[FormData1, Form()]):
+    return data
+
