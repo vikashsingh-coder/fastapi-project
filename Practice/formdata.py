@@ -49,4 +49,3 @@ class FormData1(BaseModel):
 @app.post("/login/")
 async def login(data: Annotated[FormData1, Form()]):
     return data
-

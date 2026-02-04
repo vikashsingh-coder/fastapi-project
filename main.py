@@ -124,10 +124,3 @@
 
 # How to handle form data in FastAPI
 
-from typing import Annotated
-from fastapi import FastAPI, Form
-from pydantic import BaseModel
-
-app = FastAPI()
-
-
