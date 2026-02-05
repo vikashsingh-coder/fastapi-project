@@ -1,5 +1,5 @@
 import random
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, Query
 from typing import Annotated
 from pydantic import AfterValidator
 
