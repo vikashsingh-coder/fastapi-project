@@ -4,7 +4,7 @@
 import time
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
@@ -44,6 +44,21 @@ async def authenticate_requrest(request: Request, call_next):
             )
     response = await call_next(request)
     return response
+
+# CORS (Cross-Origin Resource Sharing) 
+# When you're building a MERN-style frontend + FastAPI backend, you need CORS.
+# Required when frontend and backend run on different ports
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Specify allowed origins (e.g., frontend)
+    allow_credentials=True,  # Allow cookies and credentials (must not use '*' with this)
+    allow_methods=["*"],     # Allow all HTTP methods (e.g., GET, POST, PUT, DELETE)
+    allow_headers=["*"],     # Allow all headers (e.g., Content-Type, Authorization)
+)
+
+# Rate Limiting (Production Use Case)
+
+
 
 @app.get("/unprotected")
 async def unprotected_route():
