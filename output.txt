@@ -1,5 +1,0 @@
-email for xyz@gmai.com: some message from notification api 
-notification for mentorvi@gmail.com: someting new again 
-notification for mentorvi@gmail.com: someting new again 
-message: query received: here is our query  
-message: read items with query: here is our query  
