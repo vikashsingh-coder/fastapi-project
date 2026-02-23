@@ -17,11 +17,10 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    # "http://localhost.tiangolo.com",
-    # "https://localhost.tiangolo.com",
-    # "http://localhost",  # assume port no 80
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",  # assume port no 80
     "http://localhost:8080",
-    # "*"
 ]
 
 app.add_middleware(
