@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Response
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, StreamingResponse
 
 app = FastAPI()
 
@@ -28,3 +28,13 @@ def get_items() :
 def get_items() :
     content = "<item><name>Apple</name><price>1.5</price></item>"
     return Response(content=content, media_type="application/xml")
+
+def fake_vidio_streaming():
+    for i in range(10):
+        yield f"some fake video bites {i} "
+
+# Streaming
+@app.get("/streaming-file")
+async def main():
+    return StreamingResponse(fake_vidio_streaming())
+
